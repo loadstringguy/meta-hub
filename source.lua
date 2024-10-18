@@ -46,10 +46,10 @@ print('Done! Now Loading')
 --> UI Initialization
 local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/refs/heads/main/Source.Lua",true))()
 
-local Window = Lib:CreateWindow({
-    Title = "Meta Hub"
+local Window = Lib:MakeWindow({
+    Title = "Meta Hub : FF2"
     SubTitle = "by NG,fixed and updated by woops.cc",
-  SaveFolder = "Script | Meta.lua"
+    SaveFolder = "Script | Meta.lua"
 })
 
 local MainTab = Window:CreateTab("Main", 13594361489)
