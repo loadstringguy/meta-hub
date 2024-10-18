@@ -1,96 +1,45 @@
 print('Initializing AC Bypass!')
 
---// Services
-local Players = cloneref(game:GetService("Players"))
-local ReplicatedStorage = cloneref(game:GetService("ReplicatedStorage"))
-local RunService = cloneref(game:GetService("RunService"))
-local UserInputService = cloneref(game:GetService("UserInputService"))
-local Teams = cloneref(game:GetService("Teams"))
-local TweenService = cloneref(game:GetService("TweenService"))
-local Stats = cloneref(game:GetService("Stats"))
-local RunService = cloneref(game:GetService("RunService"))
+if not LPH_OBFUSCATED then
+    getfenv().LPH_NO_VIRTUALIZE = function(f) return f end
+  end
+  
 
-if game.PlaceId ~= 8206123457 or game.PlaceId == 8204899140 then
-    --> Made by Unlimited, Modified/Updated by NG/Johan Peterson
+  local ReplicatedStorage = game:GetService("ReplicatedStorage")
+  
 
-    --// Services
-    local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-    --// Variables
-    local Player = game:GetService("Players").LocalPlayer
-    local Character = Player.Character or Player.CharacterAdded:Wait()
-    local HRP = Character and Character.HumanoidRootPart
-    local Hooks = {}
-    local HandshakeArgs = nil
-    local Remote = ReplicatedStorage:WaitForChild("Remotes").CharacterSoundEvent
-    local ACString = nil
-    
-    --> os.clock hook
-    local RandomNumber = math.random(1e3, 1e5)
-
-    Hooks.Clock = hookfunction(os.date, function(...)
-        return Hooks.Clock(...) + RandomNumber
-    end)
-
-    --> namecall hook
-    Hooks.Namecall = hookmetamethod(game, "__namecall", function(self, ...)
-        local Method = getnamecallmethod()
-        local Args = {...}
-
-        if not checkcaller() and self == Remote and (Method == "FireServer" or Method == "fireServer") and string.find(Args[1], "AC") then
-            if not HandshakeArgs then
-                if type(Args[2]) == "table" and #Args[2] == 19 then
-                    ACString = Args[1]
-                    HandshakeArgs = Args[2]
-                end
-            else
-                return coroutine.yield()
-            end
-        end
-
-        return Hooks.Namecall(self, ...)
-    end)
-
-    while not ACString and not HandshakeArgs do
-        task.wait()
-    end
-
-    print("Found handshake arguments.")
-
-    task.wait(3)
-
-    for i, v in pairs(getgc()) do
-        if type(v) == "function" then
-            if getinfo(v).source:find("PlayerModule.LocalScript") then
+  local Handshake = ReplicatedStorage.Remotes.CharacterSoundEvent
+  local Hooks = {}
+  local HandshakeInts = {}
+  
+  LPH_NO_VIRTUALIZE(function()
+    for i, v in getgc() do
+        if typeof(v) == "function" and islclosure(v) then
+            if (#getprotos(v) == 1) and table.find(getconstants(getproto(v, 1)), 4000001) then
                 hookfunction(v, function() end)
             end
         end
     end
-
-    print("Hooked all anticheat functions.")
-
-    local ReplicateHandshake = function()
-        return Remote:fireServer(ACString, HandshakeArgs, nil)
-    end
-
-    task.spawn(function()
-        while task.wait(0.4) do
-            local Success, Error = pcall(ReplicateHandshake)
-
-            if not Success or Error then
-                return {
-                    warn("Bypass timed out."),
-                    task.wait(20),
-                    game:GetService("Players").LocalPlayer:Kick("Bypass timed out.")
-                }
+  end)()
+  
+  Hooks.__namecall = hookmetamethod(game, "__namecall", LPH_NO_VIRTUALIZE(function(self, ...)
+    local Method = getnamecallmethod()
+    local Args = {...}
+  
+    if not checkcaller() and (self == Handshake) and (Method == "fireServer") and (string.find(Args[1], "AC")) then
+        if (#HandshakeInts == 0) then
+            HandshakeInts = {table.unpack(Args[2], 2, 18)}
+        else
+            for i, v in HandshakeInts do
+                Args[2][i + 1] = v
             end
         end
-    end)
-
-    print("Replicated handshake.")
-end
-
-task.wait()
+    end
+  
+    return Hooks.__namecall(self, ...)
+  end))
+  
+  task.wait(1)
 
 print('Done! Now Loading')
 
@@ -98,7 +47,7 @@ print('Done! Now Loading')
 local MakoLib = loadstring(game:HttpGet("https://gist.githubusercontent.com/N2TheLegend/bc773f2cb81cff790e1929e40ce83664/raw/9746b17e8537d53cd32c45f311eb949f1b553f07/Mako.lua",true))()
 
 local Window = MakoLib:CreateWindow({
-    Title = "Meta Hub Free Source!"
+    Title = "Meta Hub"
 })
 
 local MainTab = Window:CreateTab("Main", 13594361489)
@@ -107,7 +56,7 @@ local PhysicsTab = Window:CreateTab("Physics")
 
 --> Section Stuff
 local QBAimbot = MainTab:CreateSection("QB Aimbot", 13594361489)
-local FootballMagnents = MainTab:CreateSection("Magnents", 13594361489)
+local FootballMagnents = MainTab:CreateSection("Magnets", 13594361489)
 local PassingStuff = MainTab:CreateSection("Passing", 13594361489)
 local PullVector = MainTab:CreateSection("Pull Vector", 13594361489)
 local Physics = PhysicsTab:CreateSection("Dive Vector")
@@ -133,7 +82,7 @@ getgenv().Football_Vector = 0
 getgenv().Custom_WalkSpeed = false
 getgenv().Custom_JumpPower = false
 
-getgenv().Magnent_Mode = nil
+getgenv().Magnet_Mode = nil
 
 --> Toggles and Sliders Setup
 QBAimbot:CreateToggle({
