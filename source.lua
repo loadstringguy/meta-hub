@@ -75,7 +75,7 @@ getgenv().customLead = 0
 getgenv().customTargetHeight = 0
 getgenv().AutoLeadDistance = false
 
-getgenv().Football_Magnents = false
+getgenv().Football_Magnets = false
 getgenv().Pull_Vector = false
 
 getgenv().Football_DistanceCatch = 0
@@ -141,21 +141,21 @@ QBAimbot:CreateToggle({
     end,
 })
 
-FootballMagnents:CreateToggle({
+FootballMagnets:CreateToggle({
     Title = "Enabled",
     Binding = false,
     CurrentValue = false,
     Callback = function(Value)
-        getgenv().Football_Magnents = Value
+        getgenv().Football_Magnets = Value
     end,
 })
 
-FootballMagnents:CreateDropdown({
+FootballMagnets:CreateDropdown({
     Title = "Mag Type",
     Options = {"Regular", "Blatant", "Legit"},
     CurrentOption = "Regular",
     Callback = function(Value)
-        if (getgenv().Football_Magnents) then
+        if (getgenv().Football_Magnets) then
             
         end
     end,
@@ -177,7 +177,7 @@ local function autoCatch()
     end
 end
 
-FootballMagnents:CreateToggle({
+FootballMagnets:CreateToggle({
     Title = "Auto Catch",
     Binding = false,
     CurrentValue = false,
@@ -188,7 +188,7 @@ FootballMagnents:CreateToggle({
     end,
 })
 
-FootballMagnents:CreateSlider({
+FootballMagnets:CreateSlider({
     Title = "Auto Catch Distance",
     CurrentValue = 0,
     Range = {0, 10},
@@ -199,7 +199,7 @@ FootballMagnents:CreateSlider({
 
 local AS_Enabled = false
 
-FootballMagnents:CreateToggle({
+FootballMagnets:CreateToggle({
     Title = "Auto Swat",
     Binding = false,
     CurrentValue = false,
@@ -219,12 +219,12 @@ FootballMagnents:CreateToggle({
     end,
 })
 
-FootballMagnents:CreateSlider({
+FootballMagnets:CreateSlider({
     Title = "Mag Distance",
     CurrentValue = 0,
     Range = {0, 120},
     Callback = function(Value)
-        if (getgenv().Football_Magnents) then
+        if (getgenv().Football_Magnets) then
             getgenv().Football_DistanceCatch = Value
         end
     end,
