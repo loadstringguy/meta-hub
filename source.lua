@@ -84,7 +84,7 @@ getgenv().Football_Vector = 0
 getgenv().Custom_WalkSpeed = false
 getgenv().Custom_JumpPower = false
 
-getgenv().Magnet_Mode = nil
+getgenv().Magnet_Mode = Blatant
 
 --> Toggles and Sliders Setup
 QBAimbot:CreateToggle({
