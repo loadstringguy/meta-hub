@@ -335,7 +335,7 @@ task.spawn(function()
     game:GetService("RunService").Heartbeat:Connect(function()
         for _, Value in pairs(workspace:GetChildren()) do
             if Value.Name == "Football" and Value:IsA("BasePart") then
-                if (game:GetService("Players").LocalPlayer.Character:FindFirstChild("CatchRight").Position - Value.Position).Magnitude <= Football_DistanceCatch and getgenv().Football_Magnents then
+                if (game:GetService("Players").LocalPlayer.Character:FindFirstChild("CatchRight").Position - Value.Position).Magnitude <= Football_DistanceCatch and getgenv().Football_Magnets then
                     firetouchinterest(game:GetService("Players").LocalPlayer.Character:WaitForChild("CatchRight"), Value, 0)
                     firetouchinterest(game:GetService("Players").LocalPlayer.Character:WaitForChild("CatchRight"), Value, 1)
                     task.wait()
