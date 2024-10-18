@@ -58,7 +58,7 @@ local PhysicsTab = Window:CreateTab("Physics")
 
 --> Section Stuff
 local QBAimbot = MainTab:CreateSection("QB Aimbot", 13594361489)
-local FootballMagnents = MainTab:CreateSection("Magnets", 13594361489)
+local FootballMagnets = MainTab:CreateSection("Magnets", 13594361489)
 local PassingStuff = MainTab:CreateSection("Passing", 13594361489)
 local PullVector = MainTab:CreateSection("Pull Vector", 13594361489)
 local Physics = PhysicsTab:CreateSection("Dive Vector")
