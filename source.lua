@@ -44,7 +44,7 @@ if not LPH_OBFUSCATED then
 print('Done! Now Loading')
 
 --> UI Initialization
-local MakoLib = loadstring(game:HttpGet("https://gist.githubusercontent.com/N2TheLegend/bc773f2cb81cff790e1929e40ce83664/raw/9746b17e8537d53cd32c45f311eb949f1b553f07/Mako.lua",true))()
+local MakoLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/refs/heads/main/Source.Lua",true))()
 
 local Window = MakoLib:CreateWindow({
     Title = "Meta Hub"
