@@ -48,13 +48,13 @@ local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/R
 
 local Window = Lib:MakeWindow({
     Title = "Meta Hub : FF2"
-    SubTitle = "by NG,fixed and updated by woops.cc",
+    SubTitle = "by NG fixed and updated by woops.cc",
     SaveFolder = "Script | Meta.lua"
 })
 
-local MainTab = Window:CreateTab("Main", 13594361489)
-local CharacterTab = Window:CreateTab("Player", 13585011079)
-local PhysicsTab = Window:CreateTab("Physics")
+local Tab1 = Window:MakeTab("Main", 13594361489)
+local Tab2 = Window:MakeTab("Player", 13585011079)
+local Tab3 = Window:MakeTab("Physics")
 
 --> Section Stuff
 local QBAimbot = MainTab:CreateSection("QB Aimbot", 13594361489)
