@@ -43,28 +43,30 @@ if not LPH_OBFUSCATED then
 
 print('Done! Now Loading')
 
---> UI Initialization
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV4/refs/heads/main/Source.lua",true))()
 
-local Window = Library:MakeWindow({
-    Title = "Meta Hub : FF2",
-    SubTitle = "by NG,fixed and updated by woops",
-    LoadText = "Meta Hub",
-    Flags =  "Meta Hub | Script.lua"
+--> UI Initialization
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV4/refs/heads/main/Source.lua",true))()
+
+local Window = redzlib:MakeWindow({
+  Title = "Meta Hub : FF2",
+  SubTitle = "by : NG,updated by woops.cc",
+  LoadText = "META HUB ON TOP!",
+  Flags = "Meta Hub | Script.lua"
 })
 
-local Main = Window:MakeTab({"Main", rbxassetid://13594361489})
-local Player = Window:MakeTab({"Player", rbxassetid://13585011079})
-local Physics = Window:MakeTab({"Physics"})
+
+local Main = Window:MakeTab({Name = "Main", Icon = "13594361489"})
+local Player = Window:MakeTab({Name = "Player", Icon = "10734920149"})
+local Physics = Window:MakeTab({Name = "Physics" Icon =  "10709751939"})
 
 --> Section Stuff
-local QBAimbot = MainTab:AddSection({"QB Aimbot", rbxassetid://13594361489})
-local FootballMagnets = MainTab:AddSection({"Magnets", rbxassetid://13594361489})
-local PassingStuff = MainTab:AddSection({"Passing", rbxassetid://13594361489})
-local PullVector = MainTab:AddSection({"Pull Vector", rbxassetid://13594361489})
+local QBAimbot = MainTab:AddSection({"QB Aimbot"})
+local FootballMagnets = MainTab:AddSection({"Magnets"})
+local PassingStuff = MainTab:AddSection({"Passing"})
+local PullVector = MainTab:AddSection({"Pull Vector"})
 local Physics = PhysicsTab:AddSection({"Dive Vector"})
-local Misc = CharacterTab:AddSection({"Misc", rbxassetid://13585011079})
-local Movement = CharacterTab:AddSection({"Movement", rbxassetid://13585011079})
+local Misc = CharacterTab:AddSection({"Misc"})
+local Movement = CharacterTab:AddSection({"Movement"})
 
 --> Variables For Callbacks
 getgenv().qbaimbotenabled = false
