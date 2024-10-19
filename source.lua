@@ -60,13 +60,13 @@ local Player = Window:MakeTab({Name = "Player", Icon = "10734920149"})
 local Physics = Window:MakeTab({Name = "Physics", Icon =  "10709751939"})
 
 --> Section Stuff
-local QBAimbot = MainTab:AddSection({"QB Aimbot"})
-local FootballMagnets = MainTab:AddSection({"Magnets"})
-local PassingStuff = MainTab:AddSection({"Passing"})
-local PullVector = MainTab:AddSection({"Pull Vector"})
-local Physics = PhysicsTab:AddSection({"Dive Vector"})
-local Misc = CharacterTab:AddSection({"Misc"})
-local Movement = CharacterTab:AddSection({"Movement"})
+local QBAimbot = Main:AddSection({"QB Aimbot"})
+local FootballMagnets = Main:AddSection({"Magnets"})
+local PassingStuff = Main:AddSection({"Passing"})
+local PullVector = Main:AddSection({"Pull Vector"})
+local Physics = Physics:AddSection({"Dive Vector"})
+local Misc = Player:AddSection({"Misc"})
+local Movement = Player:AddSection({"Movement"})
 
 --> Variables For Callbacks
 getgenv().qbaimbotenabled = false
