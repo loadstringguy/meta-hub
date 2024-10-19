@@ -52,18 +52,18 @@ local Window = Library:MakeWindow({
     SaveFolder = "Script | Meta.lua"
 })
 
-local Tab1 = Window:MakeTab({"Main", 13594361489})
-local Tab2 = Window:MakeTab({"Player", 13585011079})
-local Tab3 = Window:MakeTab({"Physics")
+local Main = Window:MakeTab({"Main", 13594361489})
+local Player = Window:MakeTab({"Player", 13585011079})
+local Physics = Window:MakeTab({"Physics"})
 
 --> Section Stuff
-local QBAimbot = MainTab:CreateSection("QB Aimbot", 13594361489)
-local FootballMagnets = MainTab:CreateSection("Magnets", 13594361489)
-local PassingStuff = MainTab:CreateSection("Passing", 13594361489)
-local PullVector = MainTab:CreateSection("Pull Vector", 13594361489)
-local Physics = PhysicsTab:CreateSection("Dive Vector")
-local Misc = CharacterTab:CreateSection("Misc", 13585011079)
-local Movement = CharacterTab:CreateSection("Movement", 13585011079)
+local QBAimbot = MainTab:AddSection("QB Aimbot", 13594361489)
+local FootballMagnets = MainTab:AddSection("Magnets", 13594361489)
+local PassingStuff = MainTab:AddSection("Passing", 13594361489)
+local PullVector = MainTab:AddSection("Pull Vector", 13594361489)
+local Physics = PhysicsTab:AddSection("Dive Vector")
+local Misc = CharacterTab:AddSection("Misc", 13585011079)
+local Movement = CharacterTab:AddSection("Movement", 13585011079)
 
 --> Variables For Callbacks
 getgenv().qbaimbotenabled = false
