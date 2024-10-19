@@ -90,79 +90,51 @@ getgenv().Custom_JumpPower = false
 getgenv().Magnet_Mode = Blatant
 
 --> Toggles and Sliders Setup
-QBAimbot:CreateToggle({
-  Title = "Predict Ball Arc",
-  Binding = false,
-  CurrentValue = false,
-  Callback = function(Value)
+
+local predballarc = Quarterback:AddToggle({"Predict Ball Arc", false, function(Value)
     if (getgenv().qbaimbotenabled) then
         getgenv().predictBallArc = Value
-    end
-  end,
-})
+end})
 
 
-QBAimbot:CreateToggle({
-  Title = "Aimbot Enabled",
-  Binding = false,
-  CurrentValue = false,
-  Callback = function(Value)
+local aimbot = Quarterback:AddToggle({"Quarterback Aimbot", false, function(Value)
     getgenv().qbaimbotenabled = Value
-  end,
-})
-
-QBAimbot:CreateToggle({
-  Title = "Auto Angle",
-  Binding = false,
-  CurrentValue = false,
-  Callback = function(Value)
+end})
+                    
+local autoangle = Quarterback:AddToggle({"Auto Angle", false, function(Value)            
     if (getgenv().qbaimbotenabled) then
       getgenv().autoAngle = Value
-    end
-  end,
-})
+end})
+                                
 
-QBAimbot:CreateToggle({
-  Title = "Show Arc Tracer",
-  Binding = false,
-  CurrentValue = false,
-  Callback = function(Value)
+local showarctracer = Quarterback:AddToggle({"Show Arc Tracer", false, function(Value)
     if (getgenv().qbaimbotenabled) then
       getgenv().showArcTracer = Value
-    end
-  end,
-})
-
-QBAimbot:CreateToggle({
-    Title = "Hide ESP & Highlight",
-    Binding = false,
-    CurrentValue = false,
-    Callback = function(Value)
-        if (getgenv().qbaimbotenabled) then
+end})
+                                            
+local hidehighlightsandesp = Quarterback:AddToggle({"Hide Highlights and Esp", false, function(Value)
+if (getgenv().qbaimbotenabled) then
             getgenv().hideDeco = Value
-        end
-    end,
-})
-
-FootballMagnets:CreateToggle({
-    Title = "Enabled",
-    Binding = false,
-    CurrentValue = false,
-    Callback = function(Value)
+end})
+                                                        
+local mags = Main:AddToggle({"Football Magnets", false, function(Value)
         getgenv().Football_Magnets = Value
-    end,
+end})
+                                                                
+local mag type = Main:AddDropdown({
+  Name = "Magnet Type",
+  Description = "Choose from 3 type of magnets.",
+  Options = {"Legit", "Regular", "Blatant"},
+  Default = {"Regular"},
+  Flag = "burger king foot lettuce",
+  MultiSelect = false
 })
 
-FootballMagnets:CreateDropdown({
-    Title = "Mag Type",
-    Options = {"Regular", "Blatant", "Legit"},
-    CurrentOption = "Regular",
-    Callback = function(Value)
-        if (getgenv().Football_Magnets) then
-            
-        end
-    end,
-})
+Dropdown:Callback(function(Values)
+  print(Values, Values.Football_Magnets)
+  warn(" success ")
+  table.foreach(Values, print)
+end
 
 local autodist = 10
 
