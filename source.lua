@@ -49,7 +49,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzH
 local Window = Library:MakeWindow({
     Title = "Meta Hub : FF2",
     SubTitle = "by NG,fixed and updated by woops",
-    LoadText = "Meta Hub"
+    LoadText = "Meta Hub",
     Flags =  "Meta Hub | Script.lua
 })
 
