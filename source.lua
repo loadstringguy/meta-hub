@@ -50,7 +50,7 @@ local Window = Library:MakeWindow({
     Title = "Meta Hub : FF2",
     SubTitle = "by NG,fixed and updated by woops",
     LoadText = "Meta Hub",
-    Flags =  "Meta Hub | Script.lua
+    Flags =  "Meta Hub | Script.lua"
 })
 
 local Main = Window:MakeTab({"Main", 13594361489})
