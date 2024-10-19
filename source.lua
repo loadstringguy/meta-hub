@@ -53,18 +53,18 @@ local Window = Library:MakeWindow({
     Flags =  "Meta Hub | Script.lua"
 })
 
-local Main = Window:MakeTab({"Main", 13594361489})
-local Player = Window:MakeTab({"Player", 13585011079})
+local Main = Window:MakeTab({"Main", rbxassetid://13594361489})
+local Player = Window:MakeTab({"Player", rbxassetid://13585011079})
 local Physics = Window:MakeTab({"Physics"})
 
 --> Section Stuff
-local QBAimbot = MainTab:AddSection({"QB Aimbot", 13594361489})
-local FootballMagnets = MainTab:AddSection({"Magnets", 13594361489})
-local PassingStuff = MainTab:AddSection({"Passing", 13594361489})
-local PullVector = MainTab:AddSection({"Pull Vector", 13594361489})
+local QBAimbot = MainTab:AddSection({"QB Aimbot", rbxassetid://13594361489})
+local FootballMagnets = MainTab:AddSection({"Magnets", rbxassetid://13594361489})
+local PassingStuff = MainTab:AddSection({"Passing", rbxassetid://13594361489})
+local PullVector = MainTab:AddSection({"Pull Vector", rbxassetid://13594361489})
 local Physics = PhysicsTab:AddSection({"Dive Vector"})
-local Misc = CharacterTab:AddSection({"Misc", 13585011079})
-local Movement = CharacterTab:AddSection({"Movement", 13585011079})
+local Misc = CharacterTab:AddSection({"Misc", rbxassetid://13585011079})
+local Movement = CharacterTab:AddSection({"Movement", rbxassetid://13585011079})
 
 --> Variables For Callbacks
 getgenv().qbaimbotenabled = false
