@@ -44,17 +44,17 @@ if not LPH_OBFUSCATED then
 print('Done! Now Loading')
 
 --> UI Initialization
-local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/refs/heads/main/Source.Lua",true))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/refs/heads/main/Source.Lua",true))()
 
-local Window = Lib:MakeWindow({
-    Title = "Meta Hub : FF2"
-    SubTitle = "by NG fixed and updated by woops.cc",
+local Window = Library:MakeWindow({
+    Title = "Meta Hub : FF2",
+    SubTitle = "by NG fixed and updated by woops",
     SaveFolder = "Script | Meta.lua"
 })
 
-local Tab1 = Window:MakeTab("Main", 13594361489)
-local Tab2 = Window:MakeTab("Player", 13585011079)
-local Tab3 = Window:MakeTab("Physics")
+local Tab1 = Window:MakeTab({"Main", 13594361489})
+local Tab2 = Window:MakeTab({"Player", 13585011079})
+local Tab3 = Window:MakeTab({"Physics")
 
 --> Section Stuff
 local QBAimbot = MainTab:CreateSection("QB Aimbot", 13594361489)
