@@ -57,7 +57,7 @@ local Window = redzlib:MakeWindow({
 
 local Main = Window:MakeTab({Name = "Main", Icon = "13594361489"})
 local Player = Window:MakeTab({Name = "Player", Icon = "10734920149"})
-local Physics = Window:MakeTab({Name = "Physics" Icon =  "10709751939"})
+local Physics = Window:MakeTab({Name = "Physics", Icon =  "10709751939"})
 
 --> Section Stuff
 local QBAimbot = MainTab:AddSection({"QB Aimbot"})
