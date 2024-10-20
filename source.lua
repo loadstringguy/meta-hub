@@ -87,73 +87,72 @@ getgenv().Magnet_Mode = nil
 --> Toggles and Sliders Setup
 
 local predballarc = Quarterback:AddToggle({
-  Name = "Predict Ball Arc",
-  Default = false,
-  Callback = function(Value)
-  if getgenv().qbaimbotenabled then
-     getgenv().predictBallArc = Value               
-  end
-})
-
-
-local qbaim = Quarterback:AddToggle({
-  Name = "Quarterback Aimbot",
-  Default = false,
-  Callback = function(Value)
-    getgenv().qbaimbotenabled = Value
-  end
-})                    
-
-
-local autoang = Quarterback:AddToggle({
-  Name = "Auto Angle",
-  Default = false,
-  Callback = function(Value)
-    if (getgenv().qbaimbotenabled) then
-      getgenv().autoAngle = Value
-
+    Name = "Predict Ball Arc",
+    Default = false,
+    Callback = function(Value)
+        if getgenv().qbaimbotenabled then
+            getgenv().predictBallArc = Value
+        end
     end
 })
-                                    
+
+local qbaim = Quarterback:AddToggle({
+    Name = "Quarterback Aimbot",
+    Default = false,
+    Callback = function(Value)
+        getgenv().qbaimbotenabled = Value
+    end
+})
+
+local autoang = Quarterback:AddToggle({
+    Name = "Auto Angle",
+    Default = false,
+    Callback = function(Value)
+        if getgenv().qbaimbotenabled then
+            getgenv().autoAngle = Value
+        end
+    end
+})
 
 local showarctracer = Quarterback:AddToggle({
-  Name = "Show Arc Tracer",
-  Default = false,
-  Callback = function(Value)
-    if (getgenv().qbaimbotenabled) then
-      getgenv().showArcTracer = Value
-  end
-})
-            
-                                            
-local hideesp = Quarterback:AddToggle({
-  Name = "Hide Highlights and Esp",
-  Default = false,
-  Callback = function(Value)
-    if (getgenv().qbaimbotenabled) then
-      getgenv().hideDeco = Value
-  end
+    Name = "Show Arc Tracer",
+    Default = false,
+    Callback = function(Value)
+        if getgenv().qbaimbotenabled then
+            getgenv().showArcTracer = Value
+        end
+    end
 })
 
-                                                        
-local mags = Main:AddToggle({
-  Name = "Football Magnets",
-  Default = false,
-  Callback = function(Value)
-    getgenv().Football_Magnets = Value
-  end
-})
-                                                                
-local mag type = Main:AddDropdown({
-  Name = "Magnet Type",
-  Options = {"Legit", "Regular", "Blatant"}
-  Default = {"Regular"}
-  MultSelect = false
-  Callback = function(Value)
-    if (getgenv().Football_Magnets) then
+local hideesp = Quarterback:AddToggle({
+    Name = "Hide Highlights and Esp",
+    Default = false,
+    Callback = function(Value)
+        if getgenv().qbaimbotenabled then
+            getgenv().hideDeco = Value
         end
-    end,
+    end
 })
+
+local mags = Main:AddToggle({
+    Name = "Football Magnets",
+    Default = false,
+    Callback = function(Value)
+        getgenv().Football_Magnets = Value
+    end
+})
+
+local mag_type = Main:AddDropdown({
+    Name = "Magnet Type",
+    Options = {"Legit", "Regular", "Blatant"},
+    Default = "Regular",
+    MultiSelect = false,
+    Callback = function(Value)
+        if getgenv().Football_Magnets then
+        end
+    end
+})
+
 
 local autodist = 10
 
