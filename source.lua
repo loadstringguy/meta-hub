@@ -48,8 +48,8 @@ print('Done! Now Loading')
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV4/refs/heads/main/Source.lua",true))()
 
 local Window = redzlib:MakeWindow({
-  Title = "Meta Hub : FF2",
-  SubTitle = "by : NG,updated by woops.cc",
+  Title = "Meta Hub : Evolution",
+  SubTitle = "by : NG,fixed and updated by woops.cc",
   LoadText = "META HUB ON TOP!",
   Flags = "Meta Hub | Script.lua"
 })
