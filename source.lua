@@ -90,7 +90,7 @@ local predballarc = Quarterback:AddToggle({
   Name = "Predict Ball Arc",
   Default = false,
   Callback = function(Value)
-  if (getgenv().qbaimbotenabled then
+  if getgenv().qbaimbotenabled then
      getgenv().predictBallArc = Value               
   end
 })
