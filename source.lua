@@ -45,12 +45,11 @@ print('Done! Now Loading')
 
 
 --> UI Initialization
-local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV4/refs/heads/main/Source.lua",true))()
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/refs/heads/main/Source.Lua",true))()
 
 local Window = redzlib:MakeWindow({
   Title = "Meta Hub : FF2",
-  SubTitle = "by : NG,updated by woops.cc",
-  LoadText = "META HUB ON TOP!",
+  SubTitle = "Made by : NG,updated by woops.cc",
   Flags = "Meta Hub | Script.lua"
 })
 
@@ -91,37 +90,47 @@ getgenv().Magnet_Mode = Blatant
 
 --> Toggles and Sliders Setup
 
-local predballarc = Quarterback:AddToggle({"Predict Ball Arc", false, function(Value)
+local predballarc = Quarterback:AddToggle({
+  Name = "Predict Ball Arc",
+  Description = "If you have the arc tracer on and turn this on,itll include a part in which the ball will go to,basically useless",
+  Default = false
     if (getgenv().qbaimbotenabled) then
-        getgenv().predictBallArc = Value
-                
-end})
+        getgenv().predictBallArc = Value               
+})
 
-local aimbot = Quarterback:AddToggle({"Quarterback Aimbot", false, function(Value)
-    getgenv().qbaimbotenabled = Value
-                
-end})                    
+local qbaim = Quarterback:AddToggle({
+  Name = "Quarterback Aimbot",
+  Description = "Automatically aims to a player to perfectly throw the ball",
+  Default = false
+    getgenv().qbaimbotenabled = Value               
+})                    
 
 
-local autoangle = Quarterback:AddToggle({"Auto Angle", false, function(Value)            
+local autoangle = Quarterback:AddToggle({
+  Name = "Auto Angle",
+  Description = "The angle will be going up the more further your target goes forward,but itll go down if they come back.",
+  Default = false
     if (getgenv().qbaimbotenabled) then
       getgenv().autoAngle = Value
-                    
-end})                                
+})                                
 
-local showarctracer = Quarterback:AddToggle({"Show Arc Tracer", false, function(Value)
+local showarctracer = Quarterback:AddToggle({
+  Name = "Show Arc Tracer",
+  Description = "it will show the path of the ball when you throw the ball with qb aimbot.",
+  Default = false
     if (getgenv().qbaimbotenabled) then
       getgenv().showArcTracer = Value
-                        
-end})
+})
                                             
-local hidehighlightsandesp = Quarterback:AddToggle({"Hide Highlights and Esp", false, function(Value)
+local hideesp = Quarterback:AddToggle({
+  Name = "Hide Esp and Highlights",
+  Description = "hides the highlight of the person you target with the qb aimbot",
+  Default = false
 if (getgenv().qbaimbotenabled) then
             getgenv().hideDeco = Value
-                            
-end})
+})
                                                         
-local mags = Main:AddToggle({"Football Magnets", false, function(Value)
+
         getgenv().Football_Magnets = Value
                             
 end})
