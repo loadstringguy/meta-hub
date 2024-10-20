@@ -130,10 +130,12 @@ if (getgenv().qbaimbotenabled) then
             getgenv().hideDeco = Value
 })
                                                         
-
-        getgenv().Football_Magnets = Value
-                            
-end})
+local mags = Main:AddToggle({
+Name = Football Magnets
+Description = "This makes you get the football from the max range of twelve studs."
+Default = false
+getgenv().Football_Magnets = Value
+})
                                                                 
 local mag type = Main:AddDropdown({
   Name = "Magnet Type",
