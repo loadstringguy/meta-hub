@@ -49,7 +49,7 @@ local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzH
 
 local Window = redzlib:MakeWindow({
   Title = "Meta Hub : FF2",
-  SubTitle = "Made by : NG,updated by woops.cc",
+  SubTitle = "Made by : NG,fixed and updated by woops.cc",
   Flags = "Meta Hub | Script.lua"
 })
 
@@ -57,100 +57,134 @@ local Window = redzlib:MakeWindow({
 local Main = Window:MakeTab({Name = "Main", Icon = "13594361489"})
 local Player = Window:MakeTab({Name = "Player", Icon = "10734920149"})
 local Physics = Window:MakeTab({Name = "Physics", Icon =  "10709751939"})
-
---> Section Stuff
-local QBAimbot = Main:AddSection({"QB Aimbot"})
-local FootballMagnets = Main:AddSection({"Magnets"})
-local PassingStuff = Main:AddSection({"Passing"})
-local PullVector = Main:AddSection({"Pull Vector"})
-local Physics = Physics:AddSection({"Dive Vector"})
-local Misc = Player:AddSection({"Misc"})
-local Movement = Player:AddSection({"Movement"})
-
+local Quarterback = Window:MakeTab({Name = "Quarterback"})
+local Miscellaneous = Window:MakeTab({Name = Miscellaneous})
 --> Variables For Callbacks
-getgenv().qbaimbotenabled = false
-getgenv().showArcTracer = false
-getgenv().predictBallArc = false
-getgenv().autoAngle = false
-getgenv().hideDeco = false
-getgenv().customLead = 0
-getgenv().customTargetHeight = 0
-getgenv().AutoLeadDistance = false
+qbaimbotenabled:Set(function(Value)
+  print(Value)
+end)
 
-getgenv().Football_Magnets = false
-getgenv().Pull_Vector = false
+ShowArcTracer:Set(function(Value)
+  print(Value)
+end)
 
-getgenv().Football_DistanceCatch = 0
-getgenv().Football_Vector = 0
+predictBallArc:Set(function(Value)
+  print(Value)
+end)
 
-getgenv().Custom_WalkSpeed = false
-getgenv().Custom_JumpPower = false
+autoAngle:Set(function(Value)
+  print(Value)
+end)
 
-getgenv().Magnet_Mode = Blatant
+hideDeco:Set(function(Value)
+  print(Value)
+end)
 
+customLead:Set(function(Value)
+  print(Value)
+end)
+
+customTargetHeight:Set(function(Value)
+  print(Value)
+end)
+
+AutoLeadDistance:Set(function(Value)
+  print(Value)
+end)
+
+FootballMagnets:Set(function(Value)
+  print(Value)
+end)
+
+Pull_VectorSet(function(Value)
+  print(Value)
+end)
+
+Football_DistanceCatch:Set(function(Value)
+  print(Value)
+end)
+
+Football_Vector:Set(function(Value)
+  print(Value)
+end)
+
+Custom_WalkSpeed:Set(function(Value)
+  print(Value)
+end)
+
+Custom_JumpPower:Set(function(Value)
+  print(Value)
+end)
+
+Magnet_Mode:Set(function(Value)
+  print(Value)
+   end)
+
+Dropdown:Callback(function(FootballMagnets)
+  print(Blatant, Regular.Legit)
+  warn("g")
+  table.foreach(Legit, print)
+end)
+
+autoCatch:Set(function(Value)
+  print(Value)
+   end)
+
+Magnet_Mode:Set(function(Value)
+  print(Value)
+   end)
+
+Magnet_Mode:Set(function(Value)
+  print(Value)
+   end)
 --> Toggles and Sliders Setup
 
-local predballarc = Quarterback:AddToggle({
+local predictBallArc = Quarterback:AddToggle({
   Name = "Predict Ball Arc",
   Description = "If you have the arc tracer on and turn this on,itll include a part in which the ball will go to,basically useless",
-  Default = false
-    if (getgenv().qbaimbotenabled) then
-        getgenv().predictBallArc = Value               
+  Default = false               
 })
 
-local qbaim = Quarterback:AddToggle({
+local qbaimbotenabled = Quarterback:AddToggle({
   Name = "Quarterback Aimbot",
   Description = "Automatically aims to a player to perfectly throw the ball",
-  Default = false
-    getgenv().qbaimbotenabled = Value               
+  Default = false              
 })                    
 
 
-local autoangle = Quarterback:AddToggle({
+local autoAngle = Quarterback:AddToggle({
   Name = "Auto Angle",
   Description = "The angle will be going up the more further your target goes forward,but itll go down if they come back.",
   Default = false
-    if (getgenv().qbaimbotenabled) then
-      getgenv().autoAngle = Value
 })                                
 
-local showarctracer = Quarterback:AddToggle({
+local ShowArcTracer = Quarterback:AddToggle({
   Name = "Show Arc Tracer",
   Description = "it will show the path of the ball when you throw the ball with qb aimbot.",
   Default = false
-    if (getgenv().qbaimbotenabled) then
-      getgenv().showArcTracer = Value
 })
                                             
-local hideesp = Quarterback:AddToggle({
+local hideDeco = Quarterback:AddToggle({
   Name = "Hide Esp and Highlights",
   Description = "hides the highlight of the person you target with the qb aimbot",
   Default = false
-if (getgenv().qbaimbotenabled) then
-            getgenv().hideDeco = Value
 })
                                                         
-local mags = Main:AddToggle({
-Name = Football Magnets
-Description = "This makes you get the football from the max range of twelve studs."
+local FootballMagnets = Main:AddToggle({
+Name = "Football Magnets",
+Description = "This makes you get the football from the max range of twelve studs.",
 Default = false
-getgenv().Football_Magnets = Value
 })
                                                                 
-local mag type = Main:AddDropdown({
+local Magnet_Mode = Main:AddDropdown({
   Name = "Magnet Type",
-  Description = "Choose from 3 type of magnets.",
+  Description = "Choose from 3 types of magnets.",
   Options = {"Legit", "Regular", "Blatant"},
   Default = {"Regular"},
   Flag = "burger king foot lettuce",
   MultiSelect = false
 })
-
-Dropdown:Callback(function(Values)
-  print(Values, Values.Football_Magnets)
-  warn(" success ")
-  table.foreach(Values, print)
-end
+end)
 
 local autodist = 10
 
@@ -168,25 +202,20 @@ local function autoCatch()
     end
 end
 
-FootballMagnets:CreateToggle({
-    Title = "Auto Catch",
-    Binding = false,
-    CurrentValue = false,
-    Callback = function(value)
-        if value then
-            autoCatch()
-        end
-    end,
+local autoCatch = Main:AddToggle({
+  Name = "Auto Catch",
+  Description = "it enables an auto clicker to catch when in the radius ",
+  Default = false
 })
 
-FootballMagnets:CreateSlider({
-    Title = "Auto Catch Distance",
-    CurrentValue = 0,
-    Range = {0, 10},
-    Callback = function(value)
-        autodist = value
-    end,
-})
+    Main:AddSlider({
+  Name = "Auto Catch Distance",
+  Min = 0,
+  Max = 10,
+  Increase = 0.1,
+  Default = 2,
+  Callback = function(Value)
+    
 
 local AS_Enabled = false
 
