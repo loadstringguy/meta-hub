@@ -94,32 +94,32 @@ getgenv().Magnet_Mode = Blatant
 local predballarc = Quarterback:AddToggle({"Predict Ball Arc", false, function(Value)
     if (getgenv().qbaimbotenabled) then
         getgenv().predictBallArc = Value
-end})
+end
 
 
 local aimbot = Quarterback:AddToggle({"Quarterback Aimbot", false, function(Value)
     getgenv().qbaimbotenabled = Value
-end})
+end
                     
 local autoangle = Quarterback:AddToggle({"Auto Angle", false, function(Value)            
     if (getgenv().qbaimbotenabled) then
       getgenv().autoAngle = Value
-end})
+end
                                 
 
 local showarctracer = Quarterback:AddToggle({"Show Arc Tracer", false, function(Value)
     if (getgenv().qbaimbotenabled) then
       getgenv().showArcTracer = Value
-end})
+end
                                             
 local hidehighlightsandesp = Quarterback:AddToggle({"Hide Highlights and Esp", false, function(Value)
 if (getgenv().qbaimbotenabled) then
             getgenv().hideDeco = Value
-end})
+end
                                                         
 local mags = Main:AddToggle({"Football Magnets", false, function(Value)
         getgenv().Football_Magnets = Value
-end})
+end
                                                                 
 local mag type = Main:AddDropdown({
   Name = "Magnet Type",
