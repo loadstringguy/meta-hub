@@ -45,146 +45,92 @@ print('Done! Now Loading')
 
 
 --> UI Initialization
-local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/refs/heads/main/Source.Lua",true))()
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV4/refs/heads/main/Source.lua",true))()
 
 local Window = redzlib:MakeWindow({
   Title = "Meta Hub : FF2",
-  SubTitle = "Made by : NG,fixed and updated by woops.cc",
+  SubTitle = "by : NG,updated by woops.cc",
+  LoadText = "META HUB ON TOP!",
   Flags = "Meta Hub | Script.lua"
 })
 
 
 local Main = Window:MakeTab({Name = "Main", Icon = "13594361489"})
-local Player = Window:MakeTab({Name = "Player", Icon = "10734920149"})
+local Character = Window:MakeTab({Name = "Character", Icon = "10734920149"})
 local Physics = Window:MakeTab({Name = "Physics", Icon =  "10709751939"})
 local Quarterback = Window:MakeTab({Name = "Quarterback"})
-local Miscellaneous = Window:MakeTab({Name = Miscellaneous})
+local Miscellaneous = Window:MakeTab({Name = "Miscellaneous"})
+
 --> Variables For Callbacks
-qbaimbotenabled:Set(function(Value)
-  print(Value)
-end)
+getgenv().qbaimbotenabled = false
+getgenv().showArcTracer = false
+getgenv().predictBallArc = false
+getgenv().autoAngle = false
+getgenv().hideDeco = false
+getgenv().customLead = 0
+getgenv().customTargetHeight = 0
+getgenv().AutoLeadDistance = false
 
-ShowArcTracer:Set(function(Value)
-  print(Value)
-end)
+getgenv().Football_Magnets = false
+getgenv().autoCatch = false
+getgenv().Pull_Vector = false
 
-predictBallArc:Set(function(Value)
-  print(Value)
-end)
+getgenv().Football_DistanceCatch = 0
+getgenv().Football_Vector = 0
+getgenv().autoCatch_Distance = 0
 
-autoAngle:Set(function(Value)
-  print(Value)
-end)
+getgenv().Custom_WalkSpeed = false
+getgenv().Custom_JumpPower = false
 
-hideDeco:Set(function(Value)
-  print(Value)
-end)
+getgenv().Magnet_Mode = nil
 
-customLead:Set(function(Value)
-  print(Value)
-end)
-
-customTargetHeight:Set(function(Value)
-  print(Value)
-end)
-
-AutoLeadDistance:Set(function(Value)
-  print(Value)
-end)
-
-FootballMagnets:Set(function(Value)
-  print(Value)
-end)
-
-Pull_VectorSet(function(Value)
-  print(Value)
-end)
-
-Football_DistanceCatch:Set(function(Value)
-  print(Value)
-end)
-
-Football_Vector:Set(function(Value)
-  print(Value)
-end)
-
-Custom_WalkSpeed:Set(function(Value)
-  print(Value)
-end)
-
-Custom_JumpPower:Set(function(Value)
-  print(Value)
-end)
-
-Magnet_Mode:Set(function(Value)
-  print(Value)
-   end)
-
-Dropdown:Callback(function(FootballMagnets)
-  print(Blatant, Regular.Legit)
-  warn("g")
-  table.foreach(Legit, print)
-end)
-
-autoCatch:Set(function(Value)
-  print(Value)
-   end)
-
-Magnet_Mode:Set(function(Value)
-  print(Value)
-   end)
-
-Magnet_Mode:Set(function(Value)
-  print(Value)
-   end)
 --> Toggles and Sliders Setup
 
-local predictBallArc = Quarterback:AddToggle({
-  Name = "Predict Ball Arc",
-  Description = "If you have the arc tracer on and turn this on,itll include a part in which the ball will go to,basically useless",
-  Default = false               
-})
+local predballarc = Quarterback:AddToggle({"Predict Ball Arc", false, function(Value)
+    if (getgenv().qbaimbotenabled) then
+        getgenv().predictBallArc = Value
+                
+end})
 
-local qbaimbotenabled = Quarterback:AddToggle({
-  Name = "Quarterback Aimbot",
-  Description = "Automatically aims to a player to perfectly throw the ball",
-  Default = false              
-})                    
+local qbaim = Quarterback:AddToggle({"Quarterback Aimbot", false, function(Value)
+    getgenv().qbaimbotenabled = Value
+                
+end})                    
 
 
-local autoAngle = Quarterback:AddToggle({
-  Name = "Auto Angle",
-  Description = "The angle will be going up the more further your target goes forward,but itll go down if they come back.",
-  Default = false
-})                                
+local autoangle = Quarterback:AddToggle({"Auto Angle", false, function(Value)            
+    if (getgenv().qbaimbotenabled) then
+      getgenv().autoAngle = Value
+                    
+end})                                
 
-local ShowArcTracer = Quarterback:AddToggle({
-  Name = "Show Arc Tracer",
-  Description = "it will show the path of the ball when you throw the ball with qb aimbot.",
-  Default = false
-})
+local showarctracer = Quarterback:AddToggle({"Show Arc Tracer", false, function(Value)
+    if (getgenv().qbaimbotenabled) then
+      getgenv().showArcTracer = Value
+                        
+end})
                                             
-local hideDeco = Quarterback:AddToggle({
-  Name = "Hide Esp and Highlights",
-  Description = "hides the highlight of the person you target with the qb aimbot",
-  Default = false
-})
+local hidehighlightsandesp = Quarterback:AddToggle({"Hide Highlights and Esp", false, function(Value)
+if (getgenv().qbaimbotenabled) then
+            getgenv().hideDeco = Value
+                            
+end})
                                                         
-local FootballMagnets = Main:AddToggle({
-Name = "Football Magnets",
-Description = "This makes you get the football from the max range of twelve studs.",
-Default = false
-})
+local mags = Main:AddToggle({"Football Magnets", false, function(Value)
+        getgenv().Football_Magnets = Value
+                            
+end})
                                                                 
-local Magnet_Mode = Main:AddDropdown({
+local mag type = Main:AddDropdown({
   Name = "Magnet Type",
-  Description = "Choose from 3 types of magnets.",
-  Options = {"Legit", "Regular", "Blatant"},
-  Default = {"Regular"},
-  Flag = "burger king foot lettuce",
-  MultiSelect = false
+  Options = {"Legit", "Regular", "Blatant"}
+  Default = {"Regular"}
+  MultSelect = false
+  Callback = function(Value)
+    if (getgenv().Football_Magnets) then
+        end
+    end,
 })
-end)
 
 local autodist = 10
 
@@ -202,20 +148,21 @@ local function autoCatch()
     end
 end
 
-local autoCatch = Main:AddToggle({
-  Name = "Auto Catch",
-  Description = "it enables an auto clicker to catch when in the radius ",
-  Default = false
-})
+local autoCatch = Main:AddToggle({"Auto Catch", false, function(Value)
+        (getgenv().autoCatch = Value
+                            
+end})
 
-    Main:AddSlider({
+local autoCatch_Distance = Main:AddSlider({
   Name = "Auto Catch Distance",
-  Min = 0,
-  Max = 10,
+  MinValue = 1,
+  MaxValue = 10,
+  Default = 5,
   Increase = 0.1,
-  Default = 2,
   Callback = function(Value)
-    
+    getgenv().autoCatch_Distance = Value
+    end
+    })                      
 
 local AS_Enabled = false
 
