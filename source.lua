@@ -89,37 +89,31 @@ getgenv().Magnet_Mode = nil
 local predballarc = Quarterback:AddToggle({"Predict Ball Arc", false, function(Value)
     if (getgenv().qbaimbotenabled) then
         getgenv().predictBallArc = Value
-                
-end})
+})
 
 local qbaim = Quarterback:AddToggle({"Quarterback Aimbot", false, function(Value)
     getgenv().qbaimbotenabled = Value
-                
-end})                    
+})                    
 
 
 local autoangle = Quarterback:AddToggle({"Auto Angle", false, function(Value)            
     if (getgenv().qbaimbotenabled) then
       getgenv().autoAngle = Value
-                    
-end})                                
+})                                
 
 local showarctracer = Quarterback:AddToggle({"Show Arc Tracer", false, function(Value)
     if (getgenv().qbaimbotenabled) then
       getgenv().showArcTracer = Value
-                        
-end})
+})
                                             
 local hidehighlightsandesp = Quarterback:AddToggle({"Hide Highlights and Esp", false, function(Value)
 if (getgenv().qbaimbotenabled) then
             getgenv().hideDeco = Value
-                            
-end})
+})
                                                         
 local mags = Main:AddToggle({"Football Magnets", false, function(Value)
         getgenv().Football_Magnets = Value
-                            
-end})
+})
                                                                 
 local mag type = Main:AddDropdown({
   Name = "Magnet Type",
@@ -150,8 +144,7 @@ end
 
 local autoCatch = Main:AddToggle({"Auto Catch", false, function(Value)
         (getgenv().autoCatch = Value
-                            
-end})
+})
 
 local autoCatch_Distance = Main:AddSlider({
   Name = "Auto Catch Distance",
