@@ -86,33 +86,62 @@ getgenv().Magnet_Mode = nil
 
 --> Toggles and Sliders Setup
 
-local predballarc = Quarterback:AddToggle({"Predict Ball Arc", false, function(Value)
-    if (getgenv().qbaimbotenabled) then
-        getgenv().predictBallArc = Value
+local predballarc = Quarterback:AddToggle({
+  Name = "Predict Ball Arc",
+  Default = false,
+  Callback = function(Value)
+  if (getgenv().qbaimbotenabled then
+     getgenv().predictBallArc = Value               
+  end
 })
 
-local qbaim = Quarterback:AddToggle({"Quarterback Aimbot", false, function(Value)
+
+local qbaim = Quarterback:AddToggle({
+  Name = "Quarterback Aimbot",
+  Default = false,
+  Callback = function(Value)
     getgenv().qbaimbotenabled = Value
+  end
 })                    
 
 
-local autoangle = Quarterback:AddToggle({"Auto Angle", false, function(Value)            
+local autoang = Quarterback:AddToggle({
+  Name = "Auto Angle",
+  Default = false,
+  Callback = function(Value)
     if (getgenv().qbaimbotenabled) then
       getgenv().autoAngle = Value
-})                                
 
-local showarctracer = Quarterback:AddToggle({"Show Arc Tracer", false, function(Value)
+    end
+})
+                                    
+
+local showarctracer = Quarterback:AddToggle({
+  Name = "Show Arc Tracer",
+  Default = false,
+  Callback = function(Value)
     if (getgenv().qbaimbotenabled) then
       getgenv().showArcTracer = Value
+  end
 })
+            
                                             
-local hidehighlightsandesp = Quarterback:AddToggle({"Hide Highlights and Esp", false, function(Value)
-if (getgenv().qbaimbotenabled) then
-            getgenv().hideDeco = Value
+local hideesp = Quarterback:AddToggle({
+  Name = "Hide Highlights and Esp",
+  Default = false,
+  Callback = function(Value)
+    if (getgenv().qbaimbotenabled) then
+      getgenv().hideDeco = Value
+  end
 })
+
                                                         
-local mags = Main:AddToggle({"Football Magnets", false, function(Value)
-        getgenv().Football_Magnets = Value
+local mags = Main:AddToggle({
+  Name = "Football Magnets",
+  Default = false,
+  Callback = function(Value)
+    getgenv().Football_Magnets = Value
+  end
 })
                                                                 
 local mag type = Main:AddDropdown({
