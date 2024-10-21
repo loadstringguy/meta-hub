@@ -76,13 +76,18 @@ getgenv().autoCatch = false
 getgenv().Pull_Vector = false
 
 getgenv().Football_DistanceCatch = 0
-getgenv().Football_Vector = 0
+getgenv().PullVectorDistance = 0
 getgenv().autoCatch_Distance = 0
+getgenv().autoSwat_Distance = 0
+
+
+
 
 getgenv().Custom_WalkSpeed = false
 getgenv().Custom_JumpPower = false
 
 getgenv().Magnet_Mode = nil
+
 
 --> Toggles and Sliders Setup
 
@@ -170,15 +175,19 @@ local function autoCatch()
     end
 end
 
-local autoCatch = Main:AddToggle({"Auto Catch", false, function(Value)
-        (getgenv().autoCatch = Value
+local autocatc = Main:AddToggle({
+    Name = "Auto Catch",
+    Default = false,
+    Callback = function(Value)
+        getgenv().autoCatch = Value
+    end
 })
 
 local autoCatch_Distance = Main:AddSlider({
   Name = "Auto Catch Distance",
   MinValue = 1,
   MaxValue = 10,
-  Default = 5,
+  Default = 2,
   Increase = 0.1,
   Callback = function(Value)
     getgenv().autoCatch_Distance = Value
@@ -187,9 +196,9 @@ local autoCatch_Distance = Main:AddSlider({
 
 local AS_Enabled = false
 
-FootballMagnets:CreateToggle({
-    Title = "Auto Swat",
-    Binding = false,
+local swat = Main:AddToggle({
+    Name = "Auto Swat",
+    Default = false,
     CurrentValue = false,
     Callback = function(v)
         AS_Enabled = v
@@ -207,10 +216,9 @@ FootballMagnets:CreateToggle({
     end,
 })
 
-FootballMagnets:CreateSlider({
-    Title = "Mag Distance",
-    CurrentValue = 0,
-    Range = {0, 120},
+local magdistance = Main:AddSlider({
+    Name = "Magnet Distance",
+    Default = false,
     Callback = function(Value)
         if (getgenv().Football_Magnets) then
             getgenv().Football_DistanceCatch = Value
@@ -218,10 +226,9 @@ FootballMagnets:CreateSlider({
     end,
 })
 
-PassingStuff:CreateToggle({
-    Title = "Auto Lead Distance",
-    Binding = false,
-    CurrentValue = false,
+local leaddistance = Quarterback:AddToggle({
+    Name = "Auto Lead Distance",
+    Default = false
     Callback = function(Value)
         if (getgenv().qbaimbotenabled) then
             getgenv().AutoLeadDistance = Value
@@ -229,62 +236,68 @@ PassingStuff:CreateToggle({
     end,
 })
 
-PassingStuff:CreateSlider({
-    Title = "Custom Target Height Offset",
-    CurrentValue = 0,
-    Range = {0, 10},
-    Callback = function(Value)
+local heightoffset = Quarterback:AddSlider({
+    Name = "Custom Target Height",
+  MinValue = 0,
+  MaxValue = 10,
+  Default = 2,
+  Increase = 0.01,
         if (getgenv().qbaimbotenabled) and (getgenv().AutoLeadDistance) then
             getgenv().customTargetHeight = Value
         end
     end,
 })
 
-PassingStuff:CreateSlider({
-    Title = "Custom Lead Distance",
-    CurrentValue = 0,
-    Range = {0, 10},
-    Callback = function(Value)
+local cleaddistance = Quarterback:AddSlider({
+    Name = "Custom Lead Distance",
+  MinValue = 0,
+  MaxValue = 10,
+  Default = 2,
+  Increase = 0.01,
+  Callback = function(Value)
         if (getgenv().qbaimbotenabled) then
             getgenv().customLead = Value
         end
     end,
 })
 
-PullVector:CreateToggle({
-    Title = "Enabled",
-    Binding = false,
-    CurrentValue = false,
+local PullVector = Physics:CreateToggle({
+    Name = "Pull Vector",
+    Default = false,
     Callback = function(Value)
         getgenv().Pull_Vector = Value
     end
 })
 
-PullVector:CreateSlider({
-    Title = "Pull Distance",
-    CurrentValue = 0,
-    Range = {0, 60},
+
+local pv = Physics:AddSlider({
+    Name = "Pull Vector Distance",
+  MinValue = 0,
+  MaxValue = 60,
+  Default = 0,
+  Increase = 0.01,
     Callback = function(Value)
         if getgenv().Pull_Vector then
-            getgenv().Football_Vector = Value
+            getgenv().PullVectorDistance = Value
         end
     end,
 })
 
-Movement:CreateToggle({
-    Title = "Custom WalkSpeed Enabled",
-    Binding = false,
-    CurrentValue = false,
+local wstog = Character:CreateToggle({
+    Name = "Custom WalkSpeed Toggle",
+    Default = false,
     Callback = function(Value)
         getgenv().Custom_WalkSpeed = Value
     end,
 })
 
-Movement:CreateSlider({
-    Title = "Custom WalkSpeed Amount",
-    CurrentValue = 20,
-    Range = {20, 29},
-    Callback = function(Value)
+local ws = Character:AddSlider({
+    Name = "Walkspeed Distance",
+  MinValue = 20,
+  MaxValue = 29,
+  Default = 20,
+  Increase = 0.01,   
+Callback = function(Value)
       task.spawn(function()
           while task.wait() do
               if (getgenv().Custom_WalkSpeed) == true then
@@ -295,19 +308,19 @@ Movement:CreateSlider({
     end,
 })
 
-Movement:CreateToggle({
-    Title = "Custom JumpPower Enabled",
-    Binding = false,
-    CurrentValue = false,
+local jumpp = Character:AddToggle({
+    Name = "JumpPower Toggle",
     Callback = function(Value)
         getgenv().Custom_JumpPower = Value
     end,
 })
 
-Movement:CreateSlider({
-    Title = "Custom JumpPower Amount",
-    CurrentValue = 50,
-    Range = {50, 80},
+local jp = Character:CreateSlider({
+    Name = "Jump Power",
+  MinValue = 0,
+  MaxValue = 80,
+  Default = 50,
+  Increase = 0.01,
     Callback = function(Value)
       task.spawn(function()
           while task.wait() do
@@ -349,10 +362,9 @@ task.spawn(function()
     end)
 end)
 
-Misc:CreateToggle({
-    Title = "Anti Admin",
-    Binding = false,
-    CurrentValue = false,
+local antia = Miscellaneous:AddToggle({
+    Name = "Anti Admin",
+    Default = false,
     Callback = function(v)
         if v then
             local moderators = {
@@ -452,10 +464,9 @@ workspace.ChildAdded:Connect(function(child)
     end
 end)
 
-Misc:CreateToggle({
+local balltracer = Miscellaneous:AddToggle({
     Title = "Ball Tracer",
-    Binding = false,
-    CurrentValue = false,
+    Default = false,
     Callback = function(enabled)
         tracerEnabled = enabled
 
@@ -479,10 +490,9 @@ Misc:CreateToggle({
     end,
 })
 
-Misc:CreateToggle({
-    Title = "Change Weather To Rain",
-    Binding = false,
-    CurrentValue = false,
+local changeweather = Miscellaneous:AddToggle({
+    Name = "Change Weather To Rain",
+    Default = false,
     Callback = function(value)
         IsSnow = value 
 
@@ -502,10 +512,9 @@ Misc:CreateToggle({
     end,
 })
 
-Misc:CreateToggle({
-    Title = "FPS Boost",
-    Binding = false,
-    CurrentValue = false,
+local boostfps = Miscellaneous:AddToggle({
+    Title = "FPS Booster",
+    Default = false,
     Callback = function(v)
         local decalsyeeted = v
         local g = game
@@ -548,10 +557,9 @@ Misc:CreateToggle({
 })
 
 
-Misc:CreateToggle({
-  Title = "Underground",
-    Binding = false,
-    CurrentValue = false,
+local underground = Miscellaneous:AddToggle({
+  Name = "Underground",
+    Default = false,
     Callback = function(state)
         state = state
         local function toggleField(state)
@@ -630,20 +638,21 @@ LocalPlayer:GetMouse().KeyDown:Connect(function(Key)
 end)
 
 
-Physics:CreateToggle({
-    Title = "Dive Vector",
-    Binding = false,
-    CurrentValue = false,
+local divevec = Physics:AddToggle({
+    Name = "Dive Vector",
+    Default = false,
     Callback = function(v)
         dv = v
     end,
 })
 
-Physics:CreateSlider({
-    Title = "Dive Vector Distance",
-    CurrentValue = 0,
-    Range = {0, 15},
-    Callback = function(v)
+local divevecdistance
+Name = "Dive Vector Distance",
+  MinValue = 0,
+  MaxValue = 15,
+  Default = 3,
+  Increase = 0.01,
+  Callback = function(v)
         dvdist = v
     end,
 })
