@@ -228,9 +228,9 @@ local magdistance = Main:AddSlider({
 
 local leaddistance = Quarterback:AddToggle({
     Name = "Auto Lead Distance",
-    Default = false
+    Default = false,
     Callback = function(Value)
-        if (getgenv().qbaimbotenabled) then
+        if getgenv().qbaimbotenabled then
             getgenv().AutoLeadDistance = Value
         end
     end,
@@ -238,11 +238,12 @@ local leaddistance = Quarterback:AddToggle({
 
 local heightoffset = Quarterback:AddSlider({
     Name = "Custom Target Height",
-  MinValue = 0,
-  MaxValue = 10,
-  Default = 2,
-  Increase = 0.01,
-        if (getgenv().qbaimbotenabled) and (getgenv().AutoLeadDistance) then
+    MinValue = 0,
+    MaxValue = 10,
+    Default = 2,
+    Increase = 0.01,
+    Callback = function(Value)
+        if getgenv().qbaimbotenabled and getgenv().AutoLeadDistance then
             getgenv().customTargetHeight = Value
         end
     end,
@@ -250,16 +251,17 @@ local heightoffset = Quarterback:AddSlider({
 
 local cleaddistance = Quarterback:AddSlider({
     Name = "Custom Lead Distance",
-  MinValue = 0,
-  MaxValue = 10,
-  Default = 2,
-  Increase = 0.01,
-  Callback = function(Value)
-        if (getgenv().qbaimbotenabled) then
+    MinValue = 0,
+    MaxValue = 10,
+    Default = 2,
+    Increase = 0.01,
+    Callback = function(Value)
+        if getgenv().qbaimbotenabled then
             getgenv().customLead = Value
         end
     end,
 })
+
 
 local PullVector = Physics:CreateToggle({
     Name = "Pull Vector",
@@ -368,16 +370,28 @@ local antia = Miscellaneous:AddToggle({
     Callback = function(v)
         if v then
             local moderators = {
-                "2618937233503944727", "209187780079648778", "265544447129812992", 
-                "677964655821324329", "469043698110562304", "792145568586792979", 
-                "490537796940070915", "678699048844132362", "837514415480897607", 
-                "417141199564963840", "580140563295109148", "231225289718497281", 
-                "719258236930228346", "345362950380322829", "513196564236468226", 
-                "241945212463742986", "153379470164623360"
-            }
-            for index, value in pairs(game:GetService("Players"):GetPlayers()) do
-                if table.find(moderators, tostring(value.UserId)) then
-                    game:GetService("Players").LocalPlayer:Kick("An Admin has joined! Make sure to keep this enabled for extra caution next time!")
+                "2618937233503944727",
+                "209187780079648778",
+                "265544447129812992",
+                "677964655821324329",
+                "469043698110562304",
+                "792145568586792979",
+                "490537796940070915",
+                "678699048844132362",
+                "837514415480897607",
+                "417141199564963840",
+                "580140563295109148",
+                "231225289718497281",
+                "719258236930228346",
+                "345362950380322829",
+                "513196564236468226",
+                "241945212463742986",
+                "153379470164623360",
+              }
+
+             for index, value in pairs(game:GetService("Players"):GetPlayers()) do
+                if table.find(moderators, value.UserId) then
+                    game:GetService("Players").LocalPlayer:kick("An Admin has joined! Make sure to keep this enabled for extra caution next time!")
                 end
             end
         end
@@ -389,7 +403,8 @@ local DistanceLabels = {}
 local tracerEnabled = false
 
 function AttachBall(Ball)
-    local RootPart = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character.PrimaryPart
+    local RootPart = Players.LocalPlayer.Character and Players.LocalPlayer..Character.PrimaryPart
+
     if RootPart and Ball then
         local Tracer = Drawing.new("Line")
         Tracer.Visible = false
@@ -410,13 +425,16 @@ function AttachBall(Ball)
                 local Vector, OnScreen = game.Workspace.CurrentCamera:WorldToViewportPoint(Ball.Position)
                 local Vector2_, OnScreen2 = game.Workspace.CurrentCamera:WorldToViewportPoint(RootPart.Position)
                 local Distance = (RootPart.Position - Ball.Position).Magnitude
+
                 if OnScreen and OnScreen2 then
                     Tracer.From = Vector2.new(Vector2_.X, Vector2_.Y)
                     Tracer.To = Vector2.new(Vector.X, Vector.Y)
                     Tracer.Visible = true
                     TextLabel.Visible = true
+
                     TextLabel.Text = tostring(math.floor(Distance)) .. " studs away"
                     TextLabel.Position = Vector2.new(Vector.X, Vector.Y)
+
                     if Distance <= 50 then
                         TextLabel.Color = Color3.fromRGB(0, 255, 0)
                         Tracer.Color = Color3.fromRGB(0, 255, 0)
@@ -439,6 +457,7 @@ function AttachBall(Ball)
     end
 end
 
+
 workspace.ChildAdded:Connect(function(child)
     if child.Name == "Football" then
         if tracerEnabled then
@@ -452,15 +471,17 @@ local balltracer = Miscellaneous:AddToggle({
     Default = false,
     Callback = function(enabled)
         tracerEnabled = enabled
+
         if not enabled then
             for _, tracer in ipairs(Tracers) do
-                tracer:Remove()
-            end
-            for _, label in ipairs(DistanceLabels) do
-                label:Remove()
-            end
-            Tracers = {}
-            DistanceLabels = {}
+                    tracer:Remove()
+                end
+
+                for _, label in ipairs(DistanceLabels) do
+                    label:Remove()
+                end
+                Tracers = {}
+                DistanceLabels = {}
         else
             for _, child in ipairs(workspace:GetChildren()) do
                 if child.Name == "Football" then
@@ -475,10 +496,19 @@ local changeweather = Miscellaneous:AddToggle({
     Name = "Change Weather To Rain",
     Default = false,
     Callback = function(value)
-        local IsSnow = value
-        for i,v in pairs(workspace.SkyWeather:GetChildren()) do
-            if v.Name == "Snow" then
-                v.Enabled = IsSnow
+        IsSnow = value 
+
+        if IsSnow  == true then
+            for i,v in pairs(workspace.SkyWeather:GetChildren()) do
+                if v.Name == "Snow" then
+                    v.Enabled = true
+                end
+            end
+        else
+            for i,v in pairs(workspace.SkyWeather:GetChildren()) do
+                if v.Name == "Snow" then
+                    v.Enabled = false
+                end
             end
         end
     end,
@@ -517,21 +547,23 @@ local boostfps = Miscellaneous:AddToggle({
             elseif v:IsA("MeshPart") then
                 v.Material = "Plastic"
                 v.Reflectance = 0
-                v.TextureID = "10385902758728957"
+                v.TextureID = 10385902758728957
             end
         end
         for i, e in pairs(l:GetChildren()) do
-            if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
+          if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
                 e.Enabled = false
             end
         end
     end,
 })
 
+
 local underground = Miscellaneous:AddToggle({
-    Name = "Underground",
+  Name = "Underground",
     Default = false,
     Callback = function(state)
+        state = state
         local function toggleField(state)
             local model = game.Workspace.Models.Field.Grass
             local transparency = state and 1 or 0
@@ -541,24 +573,35 @@ local underground = Miscellaneous:AddToggle({
                     part.Transparency = transparency
                 end
             end
+
             if state then
                 local platform = Instance.new("Part")
                 platform.Size = Vector3.new(500, 0.001, 500)
                 platform.Position = Vector3.new(10.3562937, -2.51527438, 30.4708614)
                 platform.Anchored = true
                 platform.Parent = game.Workspace
-                local colors = {BrickColor.new("Light gray")}
+
+                local colors = {
+                    BrickColor.new("Light gray")
+                }
+
                 local currentIndex = 1
+
                 while state do
                     platform.BrickColor = colors[currentIndex]
                     currentIndex = currentIndex % #colors + 1
+
                     wait(1)
+
                 end
             end
         end
+
         toggleField(state)
+
         local player = game.Players.LocalPlayer
         local character = player.Character
+
         local function setPlayerTransparency(transparency)
             for _, part in ipairs(character:GetDescendants()) do
                 if part:IsA("BasePart") then
@@ -566,19 +609,21 @@ local underground = Miscellaneous:AddToggle({
                 end
             end
         end
+
         setPlayerTransparency(0.6)
     end,
 })
 
 local LocalPlayer = game:GetService("Players").LocalPlayer
-local dvEnabled = false
-local dvDistance = 15
+local dv = false
+local dvdist = 15
 
-local function dive()
+local function dv()
     for _, Value in pairs(workspace:GetChildren()) do
         if Value.Name == "Football" and Value:IsA("BasePart") then
             local distance = (LocalPlayer.Character.HumanoidRootPart.Position - Value.Position).Magnitude
-            if distance <= dvDistance then
+
+            if distance <= dvdist then
                 local direction = (Value.Position - LocalPlayer.Character.HumanoidRootPart.Position).Unit
                 LocalPlayer.Character.HumanoidRootPart.Velocity = direction * 15
             end
@@ -587,27 +632,30 @@ local function dive()
 end
 
 LocalPlayer:GetMouse().KeyDown:Connect(function(Key)
-    if Key == string.lower("e") and dvEnabled then
-        dive()
+    if Key == string.lower("e") then
+        if dv then
+            dv()
+        end
     end
 end)
+
 
 local divevec = Physics:AddToggle({
     Name = "Dive Vector",
     Default = false,
     Callback = function(v)
-        dvEnabled = v
+        dv = v
     end,
 })
 
-local divevecdistance = Physics:AddSlider({
-    Name = "Dive Vector Distance",
-    MinValue = 0,
-    MaxValue = 15,
-    Default = 3,
-    Increase = 0.01,
-    Callback = function(v)
-        dvDistance = v
+local divevecdistance
+Name = "Dive Vector Distance",
+  MinValue = 0,
+  MaxValue = 15,
+  Default = 3,
+  Increase = 0.01,
+  Callback = function(v)
+        dvdist = v
     end,
 })
 
