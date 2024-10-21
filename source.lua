@@ -672,7 +672,6 @@ local RunService = game:GetService("RunService")
 local Player = Players.LocalPlayer
 local Mouse = Player:GetMouse()
 local Gui = game:GetObjects("rbxassetid://14769142268")[1]
-
 local locked = false
 local target = nil
 
@@ -698,8 +697,8 @@ Beam.Width1 = 0.5
 Beam.Transparency = NumberSequence.new(0)
 Beam.Color = ColorSequence.new(Color3.fromRGB(255, 11, 202))
 Beam.Attachment0 = Attachment0
-Beam.Segments = 3000
 Beam.Attachment1 = Attachment1
+Beam.Segments = 3000
 
 local data = {
     Angle = 40,
