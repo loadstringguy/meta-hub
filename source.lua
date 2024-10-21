@@ -648,16 +648,17 @@ local divevec = Physics:AddToggle({
     end,
 })
 
-local divevecdistance
-Name = "Dive Vector Distance",
-  MinValue = 0,
-  MaxValue = 15,
-  Default = 3,
-  Increase = 0.01,
-  Callback = function(v)
+local divevecdistance = Physics:AddSlider({
+    Name = "Dive Vector Distance",
+    MinValue = 0,
+    MaxValue = 15,
+    Default = 3,
+    Increase = 0.01,
+    Callback = function(v)
         dvdist = v
     end,
 })
+
 
 
 --> QB Aimbot
